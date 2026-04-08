@@ -6,6 +6,7 @@ import urllib.parse
 from geopy.geocoders import Nominatim
 from ortools.constraint_solver import routing_enums_pb2
 from ortools.constraint_solver import pywrapcp
+import os
 
 app = Flask(__name__)
 geolocator = Nominatim(user_agent="logistica_web")
@@ -99,4 +100,6 @@ def index():
     """
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    # Render necesita que uses el puerto dinámico
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
